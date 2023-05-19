@@ -57,19 +57,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: Column(
-        children: [
-          FloatingActionButton(
-            onPressed: incrementAction,
-            tooltip: 'Increment',
-            child: const Icon(Icons.arrow_drop_up),
-          ),
-          FloatingActionButton(
-            onPressed: decrementAction,
-            tooltip: 'Decrement',
-            child: const Icon(Icons.arrow_drop_down),
-          ),
-        ],
+      floatingActionButton: SizedBox(
+        height: 140.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              onPressed: incrementAction,
+              tooltip: 'Increment',
+              child: const Icon(Icons.arrow_drop_up),
+            ),
+            FloatingActionButton(
+              onPressed: decrementAction,
+              tooltip: 'Decrement',
+              child: const Icon(Icons.arrow_drop_down),
+            ),
+          ],
+        ),
       ),
     );
   }
