@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_atomicstate_test/reducers/counter_reducer.dart';
 import 'package:flutter_atomicstate_test/states/states.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
 void main() {
-  runApp(const MyApp());
+  CounterReducer();
+  runApp(const RxRoot(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +37,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final counter = context.select(() => counterState.value);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -46,16 +51,25 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$counterState.value',
+              '$counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: incrementAction,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        children: [
+          FloatingActionButton(
+            onPressed: incrementAction,
+            tooltip: 'Increment',
+            child: const Icon(Icons.arrow_drop_up),
+          ),
+          FloatingActionButton(
+            onPressed: decrementAction,
+            tooltip: 'Decrement',
+            child: const Icon(Icons.arrow_drop_down),
+          ),
+        ],
       ),
     );
   }
